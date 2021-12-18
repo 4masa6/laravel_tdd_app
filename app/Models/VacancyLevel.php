@@ -21,4 +21,14 @@ class VacancyLevel extends Model
         } 
         return '◎';
     }
+
+    public function slug() {
+        if ($this->remainingCount === 0) {
+            return 'empty';
+        }
+        if ($this->remainingCount < 5) {
+            return 'few';
+        }
+        return 'enough';
+    }
 }
