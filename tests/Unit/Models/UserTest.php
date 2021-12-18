@@ -17,8 +17,8 @@ class UserTest extends TestCase
      * @param bool $canReserve
      * @dataProvider dataCanReserve
      */
-    public function ユーザーが正常に予約できる(string $plan, int $remainingCount, int $reservationCount, bool $canReserve) {
-        
+    public function canReserve(string $plan, int $remainingCount, int $reservationCount, bool $canReserve) {
+
         /** @var User $user */
         $user = Mockery::mock(User::class)->makePartial();
         $user->shouldReceive('reservationCountThisMonth')->andReturn($reservationCount);
