@@ -18,14 +18,17 @@ class UserTest extends TestCase
      * @dataProvider dataCanReserve
      */
     public function ユーザーが正常に予約できる(string $plan, int $remainingCount, int $reservationCount, bool $canReserve) {
-        $user = new User();
+        
+        /** @var User $user */
+        $user = Mockery::mock(User::class)->makePartial();
+        $user->shouldReceive('reservationCountThisMonth')->andReturn($reservationCount);
         $user->plan = $plan;
 
         /** @var Lesson $lesson */
         $lesson = Mockery::mock(Lesson::class);
         $lesson->shouldReceive('remainingCount')->andReturn($remainingCount);
 
-        $this->assertSame($canReserve, $user->canReserve($lesson, $reservationCount));
+        $this->assertSame($canReserve, $user->canReserve($lesson, $user->canReserve($lesson)));
     }
 
     public function dataCanReserve() {
