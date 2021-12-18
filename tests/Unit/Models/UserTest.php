@@ -5,24 +5,27 @@ namespace Tests\Unit\Models;
 use PHPUnit\Framework\TestCase;
 use App\Models\User;
 use App\Models\Lesson;
+use Mockery;
 
 class UserTest extends TestCase
 {
     /**
      * @test canReserve
-     * string $plan
-     * int $remainingCount
-     * int $reservationCount
-     * bool $canReserve
+     * @param string $plan
+     * @param int $remainingCount
+     * @param int $reservationCount
+     * @param bool $canReserve
      * @dataProvider dataCanReserve
      */
     public function ユーザーが正常に予約できる(string $plan, int $remainingCount, int $reservationCount, bool $canReserve) {
         $user = new User();
         $user->plan = $plan;
 
-        $lesson = new Lesson();
+        /** @var Lesson $lesson */
+        $lesson = Mockery::mock(Lesson::class);
+        $lesson->shouldReceive('remainingCount')->andReturn($remainingCount);
 
-        $this->assertSame($canReserve, $user->canReserve($lesson->remainingCount(), $reservationCount));
+        $this->assertSame($canReserve, $user->canReserve($lesson, $reservationCount));
     }
 
     public function dataCanReserve() {
