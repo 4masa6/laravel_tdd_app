@@ -32,8 +32,8 @@ class VacancyLevelTest extends TestCase
      */
     public function Slug(int $remainingCount, string $expectedSlug) {
 
-        $level = new VacancyLevel(0);
-        $this->assertSame('empty', $level->slug());
+        $level = new VacancyLevel($remainingCount);
+        $this->assertSame($expectedSlug, $level->slug());
     }
 
     // PHPUnitには"dataProvider"という機能があり、テストのパターンを配列で定義してテストメソッドに渡すことができる
