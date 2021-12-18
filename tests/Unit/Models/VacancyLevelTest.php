@@ -17,7 +17,7 @@ class VacancyLevelTest extends TestCase
      * @param string $expectedMark
      * @dataProvider dataMark
      */
-    public function 空き枠数に応じた記号を返す(int $remainingCount, string $expectedMark) {
+    public function mark：空き枠数に応じた記号を返す(int $remainingCount, string $expectedMark) {
 
         // VacancyLevelのmark()メソッドは、コンストラクタで空き枠数を受け取り、枠数に応じた記号を返す
         // 空き0 => ×, 5未満 => △, 5以上 => ◎
@@ -33,7 +33,7 @@ class VacancyLevelTest extends TestCase
      * @param string $expectedSlug
      * @dataProvider dataSlug
      */
-    public function 空き枠数に応じたCSSを適用するためのclass属性名を返す(int $remainingCount, string $expectedSlug) {
+    public function slug：空き枠数に応じたCSSを適用するためのclass属性名を返す(int $remainingCount, string $expectedSlug) {
 
         $level = new VacancyLevel($remainingCount);
         $this->assertSame($expectedSlug, $level->slug());
