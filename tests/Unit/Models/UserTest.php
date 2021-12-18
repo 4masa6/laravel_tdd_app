@@ -2,10 +2,10 @@
 
 namespace Tests\Unit\Models;
 
-use PHPUnit\Framework\TestCase;
 use App\Models\User;
 use App\Models\Lesson;
 use Mockery;
+use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase
 {
@@ -13,6 +13,7 @@ class UserTest extends TestCase
      * @test canReserve
      * @param string $plan
      * @param int $remainingCount
+     * @param int $reservationCount
      * @dataProvider dataCanReserve_正常
      */
     public function canReserve_正常：ユーザープランと月間予約回数に応じて、レッスンを予約できるか判定する(string $plan, int $remainingCount, int $reservationCount) {
@@ -50,7 +51,7 @@ class UserTest extends TestCase
         $lesson = Mockery::mock(Lesson::class);
         $lesson->shouldReceive('remainingCount')->andReturn($remainingCount);
 
-        $this->expecteExceptionMessage($errorMessage);
+        $this->expectExceptionMessage($errorMessage);
 
         $user->canReserve($lesson);
 
@@ -79,19 +80,19 @@ class UserTest extends TestCase
                 'plan' => 'regular',
                 'remainingCount' => 1,
                 'reservationCount' => 5,
-                'canReserve' => false,
+                'errorMessage' => '今月の予約がプランの上限に達しています',
             ],
             '予約不可:レギュラー,空きなし,月の上限以下' => [
                 'plan' => 'regular',
                 'remainingCount' => 0,
                 'reservationCount' => 4,
-                'canReserve' => false,
+                'canReserve' => 'レッスンの予約可能上限に達しています',
             ],
             '予約不可:ゴールド,空きなし' => [
                 'plan' => 'gold',
                 'remainingCount' => 0,
                 'reservationCount' => 5,
-                'canReserve' => false,
+                'canReserve' => 'レッスンの予約可能上限に達しています',
             ],
         ];
     }
