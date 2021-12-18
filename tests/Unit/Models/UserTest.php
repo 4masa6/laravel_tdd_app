@@ -4,6 +4,7 @@ namespace Tests\Unit\Models;
 
 use PHPUnit\Framework\TestCase;
 use App\Models\User;
+use App\Models\Lesson;
 
 class UserTest extends TestCase
 {
@@ -17,18 +18,11 @@ class UserTest extends TestCase
      */
     public function ユーザーが正常に予約できる(string $plan, int $remainingCount, int $reservationCount, bool $canReserve) {
         $user = new User();
+        $user->plan = $plan;
 
-        // パターン１
-        $user->plan = 'regular';
-        $remainingCount = 1;
-        $reservationCount = 4;
-        $this->assertTrue($user->canReserve($remainingCount, $reservationCount));
+        $lesson = new Lesson();
 
-        // パターン２
-        $user->plan = 'regular';
-        $remainingCount = 1;
-        $reservationCount = 5;
-        $this->assertFalse($user-> canReserve($remainingCount, $reservationCount));
+        $this->assertSame($canReserve, $user->canReserve($lesson->remainingCount(), $reservationCount));
     }
 
     public function dataCanReserve() {

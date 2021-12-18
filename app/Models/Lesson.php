@@ -15,7 +15,7 @@ class Lesson extends Model
         return new VacancyLevel($this->remainingCount());
     }
 
-    private function remainingCount() {
+    public function remainingCount() {
         return $this->capacity - $this->reservations()->count();
     }
 }
