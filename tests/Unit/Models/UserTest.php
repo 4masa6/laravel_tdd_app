@@ -3,6 +3,7 @@
 namespace Tests\Unit\Models;
 
 use PHPUnit\Framework\TestCase;
+use App\Models\User;
 
 class UserTest extends TestCase
 {
@@ -27,7 +28,7 @@ class UserTest extends TestCase
         $user->plan = 'regular';
         $remainingCount = 1;
         $reservationCount = 5;
-        $this->assertFalse($user-> canReservation($remainingCount, $reservationCount));
+        $this->assertFalse($user-> canReserve($remainingCount, $reservationCount));
     }
 
     public function dataCanReserve() {
