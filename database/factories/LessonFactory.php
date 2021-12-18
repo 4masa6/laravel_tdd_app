@@ -11,7 +11,7 @@ $factory->define(Lesson::class, function (Faker $faker) {
         'coach_name' => $faker->name,
         'capacity' => $faker->randomNumber(2),
         'start_at' => $faker->dateTime,
-        'end_time' => $faker->dateTime,
+        'end_at' => $faker->dateTime,
 
     ];
 });

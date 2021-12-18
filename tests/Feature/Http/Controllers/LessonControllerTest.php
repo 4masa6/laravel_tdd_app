@@ -5,6 +5,7 @@ namespace Tests\Feature\Http\Controllers;
 use App\Models\Lesson;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\Response;
 use Tests\TestCase;
 
 class LessonControllerTest extends TestCase
@@ -18,7 +19,7 @@ class LessonControllerTest extends TestCase
 
         $lesson = factory(Lesson::class)->create(['name' => '楽しいヨガレッスン']);
 
-        $response = $this->get("/lesson/{$lesson->id}");
+        $response = $this->get("/lessons/{$lesson->id}");
 
         $response->assertStatus(Response::HTTP_OK);
 

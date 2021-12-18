@@ -18,7 +18,8 @@ class CreateLessonsTable extends Migration
             $table->string('name');
             $table->string('coach_name');
             $table->unsignedInteger('capacity');
-            $table->timestamp('start_at');$table->timestamp('end_at');
+            $table->timestamp('start_at');
+            $table->timestamp('end_at');
             $table->timestamps();
         });
     }
