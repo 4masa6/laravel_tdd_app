@@ -13,11 +13,11 @@ class VacancyLevel extends Model
     }
 
     public function mark(): string {
-        
+
         $marks = ['empty' => '×', 'few' => '△', 'enough' => '◎'];
         $slug = $this->slug();
         assert(isset($marks[$slug]), new \DomainException('invalid slug value.'));
-        
+
         return $marks[$slug];
     }
 
@@ -29,5 +29,9 @@ class VacancyLevel extends Model
             return 'few';
         }
         return 'enough';
+    }
+
+    public function __toString() {
+        return $this->mark();
     }
 }
