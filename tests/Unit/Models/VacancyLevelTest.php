@@ -5,16 +5,19 @@ namespace Tests\Unit\Models;
 use PHPUnit\Framework\TestCase;
 use App\Models\VacancyLevel;
 
+/*
+ * @see VacancyLevel
+ */
 class VacancyLevelTest extends TestCase
 {
 
     /**
-     * @test
+     * @test mark
      * @param int $remainingCount
      * @param string $expectedMark
      * @dataProvider dataMark
      */
-    public function Mark(int $remainingCount, string $expectedMark) {
+    public function 空き枠数に応じた記号を返す(int $remainingCount, string $expectedMark) {
 
         // VacancyLevelのmark()メソッドは、コンストラクタで空き枠数を受け取り、枠数に応じた記号を返す
         // 空き0 => ×, 5未満 => △, 5以上 => ◎
@@ -25,23 +28,22 @@ class VacancyLevelTest extends TestCase
     }
 
     /**
-     * @test
+     * @test slug
      * @param int $remainingCount
      * @param string $expectedSlug
      * @dataProvider dataSlug
      */
-    public function Slug(int $remainingCount, string $expectedSlug) {
+    public function 空き枠数に応じたCSSを適用するためのclass属性名を返す(int $remainingCount, string $expectedSlug) {
 
         $level = new VacancyLevel($remainingCount);
         $this->assertSame($expectedSlug, $level->slug());
     }
 
     // PHPUnitには"dataProvider"という機能があり、テストのパターンを配列で定義してテストメソッドに渡すことができる
-    // １階層目にはテストケースを記述。'空きなし''残りわずか''空き十分'
-    // 各テストケースの連想配列のキーはテストメソッドの引数と対応している。書かなくても良いが、書くと対応がわかりやすくなる
     public function dataMark() {
         return [
-            '空きなし' => [
+            '空きなし' => [ // キーにテストケースを記述。'空きなし''残りわずか''空き十分'
+                // 各テストケースの連想配列のキーはテストメソッドの引数と対応している。書かなくても良いが、書くと対応がわかりやすくなる
                 'remainingCount' => 0,
                 'expectedMark' =>  '×',
             ],
