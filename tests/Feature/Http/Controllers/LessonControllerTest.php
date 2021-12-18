@@ -3,6 +3,8 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Lesson;
+use App\Models\User;
+use App\Models\Reservation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Response;
@@ -27,7 +29,6 @@ class LessonControllerTest extends TestCase
         $response = $this->get("/lessons/{$lesson->id}");
         $response->assertStatus(Response::HTTP_OK);
         $response->assertSee($lesson->name);
-        $response->assertSee('空き状況: ×');
         $response->assertSee("空き状況: {$expectedVacancyLevelMark}");
 
     }

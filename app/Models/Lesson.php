@@ -16,6 +16,6 @@ class Lesson extends Model
     }
 
     private function remainingCount() {
-        return 0;
+        return $this->capacity - $this->reservations()->count();
     }
 }
