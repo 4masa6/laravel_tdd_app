@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 use App\Models\VacancyLevel;
 
 /*
- * @see VacancyLevel
+ * @see \App\Models\VacancyLevel
  */
 class VacancyLevelTest extends TestCase
 {
