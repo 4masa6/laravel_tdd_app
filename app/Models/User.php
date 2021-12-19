@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -56,11 +57,19 @@ class User extends Authenticatable
         if ($lesson->remainingCount() === 0) {
             throw new Exception('レッスンの予約可能上限に達しています。');
         }
-        if ($this->plan === 'gold') {
+        if ($this->profile->plan === 'gold') {
             return;
         }
         if ($this->reservationCountThisMonth() === 5) {
             throw new Exception('今月の予約がプランの上限に達しています。');
         }
+    }
+
+    public function reservations(): HasMany {
+        return $this->hasMany(Reservation::class);
+    }
+
+    public function profile(): HasOne {
+        return $this->hasOne(UserProfile::class);
     }
 }
