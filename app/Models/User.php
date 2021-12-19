@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Carvon\Carbon;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;

@@ -30,8 +30,8 @@ class LessonControllerTest extends TestCase
             factory(Reservation::class)->create(['lesson_id' => $lesson->id, 'user_id' => $user->id]);
         }
 
-    $user = factory(User::class)->create();
-    $this->actingAs($user);
+        $user = factory(User::class)->create();
+        $this->actingAs($user);
 
         // ページへのアクセス
         $response = $this->get("/lessons/{$lesson->id}");
